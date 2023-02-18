@@ -1,5 +1,6 @@
 package com.example.demoweb.controller;
 
+import com.example.demoweb.service.LikesService;
 import com.example.demoweb.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PostsViewController {
     @Autowired
     PostService postsService;
+
+    @Autowired
+    LikesService likesService;
+
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("appName", "Моё супер приложение");
@@ -24,5 +29,12 @@ public class PostsViewController {
     @RequestMapping(path = "/post/{id}", method = RequestMethod.GET)
     public String single(@PathVariable("id") Long id) {
         return "Здесь будет страница поста №" + id;
+    }
+
+    @ResponseBody
+    @RequestMapping(path = "/post/{id}/like", method = RequestMethod.POST)
+    public String like(@PathVariable("id") Long id) {
+        int likes = likesService.like(id);
+        return "" + likes;
     }
 }

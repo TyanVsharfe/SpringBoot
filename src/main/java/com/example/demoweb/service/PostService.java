@@ -14,9 +14,9 @@ public class PostService {
 
     PostService() {
         posts = new ArrayList<>(Arrays.asList(
-                new Post("Оригинальную Fallout теперь можно установить на смартфон", new Date()),
-                new Post("Microsoft подтвердила сбой приложений Windows 11 из-за драйверов Intel", new Date()),
-                new Post("Apple ограничит использование порта USB-C в iPhone 15", new Date()))
+                new Post(0L,"Оригинальную Fallout теперь можно установить на смартфон", new Date()),
+                new Post(1L,"Microsoft подтвердила сбой приложений Windows 11 из-за драйверов Intel", new Date()),
+                new Post(2L,"Apple ограничит использование порта USB-C в iPhone 15", new Date()))
         );
     }
 
@@ -25,6 +25,6 @@ public class PostService {
     }
 
     public void create(String text) {
-        posts.add(new Post(text, new Date()));
+        posts.add(new Post((long) posts.size(),text, new Date()));
     }
 }
