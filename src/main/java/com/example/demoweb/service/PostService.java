@@ -1,30 +1,25 @@
 package com.example.demoweb.service;
 
 import com.example.demoweb.model.Post;
+import com.example.demoweb.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
+
 
 @Service
 public class PostService {
-    private ArrayList<Post> posts;
+    @Autowired
+    PostRepository postRepository;
 
-    PostService() {
-        posts = new ArrayList<>(Arrays.asList(
-                new Post(0L,"Оригинальную Fallout теперь можно установить на смартфон", new Date()),
-                new Post(1L,"Microsoft подтвердила сбой приложений Windows 11 из-за драйверов Intel", new Date()),
-                new Post(2L,"Apple ограничит использование порта USB-C в iPhone 15", new Date()))
-        );
-    }
-
-    public List<Post> listAllPosts() {
-        return posts;
+    public Iterable<Post> listAllPosts() {
+        return postRepository.findAll();
     }
 
     public void create(String text) {
-        posts.add(new Post((long) posts.size(),text, new Date()));
+        Post post = new Post(null, text, new Date());
+        postRepository.save(post);
     }
+
 }

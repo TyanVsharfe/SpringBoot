@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class PostsCreateController {
+
     @Autowired
-    PostService postsService;
+    private PostService postsService;
 
     @RequestMapping(path = "/new", method = RequestMethod.GET)
     public String create(Model model) {
-        model.addAttribute("appName", "Моё супер окно Create");
         return "create";
     }
 
