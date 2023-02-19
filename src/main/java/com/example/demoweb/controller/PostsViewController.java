@@ -30,11 +30,4 @@ public class PostsViewController {
     public String single(@PathVariable("id") Long id) {
         return "Здесь будет страница поста №" + id;
     }
-
-    @ResponseBody
-    @RequestMapping(path = "/post/{id}/like", method = RequestMethod.POST)
-    public String like(@PathVariable("id") Long id) {
-        int likes = likesService.like(id);
-        return "" + likes;
-    }
 }
